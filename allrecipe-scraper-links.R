@@ -12,7 +12,7 @@ category <- c("japanese","indian")
 url_list <- c("http://allrecipes.com/recipes/699/world-cuisine/asian/japanese/?page=",
               "http://allrecipes.com/recipes/233/world-cuisine/asian/indian/?page=")
               
-scrape_links(max_page_no=2, category=category, url_list=url_list)
+scrape_links(max_page_no=2, category=category, url_list=url_list, file_path="raw_links/")
 ### End sample
 
 category <- c("japanese","indian","chinese","thai","filipino","korean")

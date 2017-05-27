@@ -6,7 +6,9 @@ file.create(errortxt, overwrite=TRUE)
 #' @param max_page_no interger for the maximum number of search queries to scrape from
 #' @param category list of categories to scrape 
 #' @param url_list list of urls that correspond to categories
-scrape_links<-function(max_page_no, category, url_list){
+#' @param file_path file path to save output
+#' @output csv files containing scrape links
+scrape_links<-function(max_page_no, category, url_list, file_path){
   for(i in 1:length(url_list)){  
     for(page_no in 1:3){
       
@@ -38,9 +40,9 @@ scrape_links<-function(max_page_no, category, url_list){
       recipe_page_no <- rep(page_no,length(recipe_path))
       recipe <- as.data.frame(cbind(recipe_category,recipe_page_no,recipe_path,recipe_name))
       
-      csvpath <- paste("raw_links/",category[i],Sys.Date(),".csv",sep="")
+      csvpath <- paste(file_path,category[i],Sys.Date(),".csv",sep="")
       
-      if(!file.exists(paste("raw_links/",category[i],Sys.Date(),".csv",sep=""))){
+      if(!file.exists(csv_path)){
         write.table(recipe, csvpath, append=T, sep=",", row.names=F, col.names=T)
       } else{
         write.table(recipe, csvpath, append=T, sep=",", row.names=F, col.names=F)  
