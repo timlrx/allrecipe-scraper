@@ -15,13 +15,13 @@ source("allrecipe-scraper-links-func.R")
 # scrape_links(max_page_no=2, category=category, url_list=url_list, file_path="raw_links/")
 ### End sample
 
-category <- c("japanese","indian","chinese","thai","filipino","korean")
+category <- c("filipino","japanese","indian","chinese","thai","korean")
 
-url_list <- c("http://allrecipes.com/recipes/699/world-cuisine/asian/japanese/?page=",
+url_list <- c("http://allrecipes.com/recipes/696/world-cuisine/asian/filipino/?page=",
+              "http://allrecipes.com/recipes/699/world-cuisine/asian/japanese/?page=",
               "http://allrecipes.com/recipes/233/world-cuisine/asian/indian/?page=",
               "http://allrecipes.com/recipes/695/world-cuisine/asian/chinese/?page=",
               "http://allrecipes.com/recipes/702/world-cuisine/asian/thai/?page=",
-              "http://allrecipes.com/recipes/696/world-cuisine/asian/filipino/?page=",
               "http://allrecipes.com/recipes/700/world-cuisine/asian/korean/?page=")
 
 scrape_links(max_page_no=10, category=category, url_list=url_list, file_path="raw_links/")

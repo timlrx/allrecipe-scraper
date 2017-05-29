@@ -11,8 +11,8 @@ scrape_ingr <- function(row_entry){
   
   # Add random pause to slow down speed of scraping
   Sys.sleep(1+runif(1, min=1, max=5))
-  num <- row_entry$recipe_path
-   #num <- 17971
+  #num <- row_entry$recipe_path
+  num <- 17971
   url <- paste("http://allrecipes.com/recipe/",num,sep="")
   
   # Scrap ingredients and misc recipe characteristics
@@ -62,6 +62,28 @@ scrape_ingr <- function(row_entry){
     html_text
   recipe_calorie <- as.numeric(gsub("([0-9]+).*$", "\\1", recipe_calorie))
   
+  recipe_stars <- webpage %>%
+    html_nodes(xpath='//meta[@property="og:rating"]') %>%
+    html_attr("content")
+    html_attrs %>%
+    as.numeric()
+  
+  recipe_reviews <- webpage %>%
+    html_nodes(".read--reviews .review-count") %>%
+    html_text %>%
+    as.character()
+  
+  recipe_followers <- webpage %>%
+    html_nodes(".icon--cook-card-follower+ span") %>%
+    html_text %>%
+    as.character()
+  recipe_followers <- ifelse(length(recipe_followers)==0,NA,recipe_followers)
+  
+  recipe_submitter <- webpage %>%
+    html_nodes(".submitter__name") %>%
+    html_text %>%
+    as.character()
+  
   recipe_ingr <- webpage %>%
     html_nodes(".added") %>%
     html_text %>%
@@ -73,11 +95,13 @@ scrape_ingr <- function(row_entry){
   
   # Subset only the ingredients (those with data-id != 0)
   recipe_ingr <- tolower(recipe_ingr[!is.na(recipe_ingr_id) & !recipe_ingr_id=="0"])
-
+  num_ingr <- length(recipe_ingr)
     
-  # Create a recipe row entry with ingredients as variables
+  # Create a recipe row entry with ingredients as variable
   tryCatch({
-    recipe_row <- cbind(row_entry, recipe_name2, recipe_time, recipe_servings, recipe_calorie)
+    recipe_row <- cbind(row_entry, recipe_name2, recipe_time, recipe_servings, recipe_calorie,
+                        recipe_submitter, recipe_followers, recipe_reviews, recipe_stars,
+                        num_ingr)
     for(i in 1:length(recipe_ingr)){
       col<-paste("recipe_ingr",i,sep="")
       recipe_row[,col] <- recipe_ingr[i]

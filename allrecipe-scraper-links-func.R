@@ -18,11 +18,13 @@ scrape_links<-function(max_page_no, category, url_list, file_path){
       
       webpage <- tryCatch(
         read_html(url),
-        error = function(err){
+        error = function(e){
           message(paste("URL does not seem to exist:", url))
           write(paste("URL does not seem to exist:", url), file=errortxt,append=TRUE) 
-          next
+          e
         })
+      
+      if(inherits(webpage, "error")) next
       
       recipe_path <- webpage %>% 
         html_nodes(".grid-col--fixed-tiles") %>%
