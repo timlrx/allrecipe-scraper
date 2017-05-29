@@ -10,8 +10,10 @@ file.create(errortxt, overwrite=TRUE)
 #' @output csv files containing scrape links
 scrape_links<-function(max_page_no, category, url_list, file_path){
   for(i in 1:length(url_list)){  
-    for(page_no in 1:3){
+    for(page_no in 1:max_page_no){
       
+      message(paste("Scraping from ", category[i], " page ", page_no))
+      Sys.sleep(5)
       url<- paste(url_list[i],page_no,sep="")
       
       webpage <- tryCatch(
@@ -19,6 +21,7 @@ scrape_links<-function(max_page_no, category, url_list, file_path){
         error = function(err){
           message(paste("URL does not seem to exist:", url))
           write(paste("URL does not seem to exist:", url), file=errortxt,append=TRUE) 
+          next
         })
       
       recipe_path <- webpage %>% 
@@ -41,8 +44,8 @@ scrape_links<-function(max_page_no, category, url_list, file_path){
       recipe <- as.data.frame(cbind(recipe_category,recipe_page_no,recipe_path,recipe_name))
       
       csvpath <- paste(file_path,category[i],Sys.Date(),".csv",sep="")
-      
-      if(!file.exists(csv_path)){
+    
+      if(!file.exists(csvpath)){
         write.table(recipe, csvpath, append=T, sep=",", row.names=F, col.names=T)
       } else{
         write.table(recipe, csvpath, append=T, sep=",", row.names=F, col.names=F)  

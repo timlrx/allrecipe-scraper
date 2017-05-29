@@ -12,8 +12,10 @@ for(i in 1:2){
   recipe_df <- data.frame()
 
   # Loop over all recipe paths in the file
-  for(x in 1:2){
+  for(x in 1:length(df$recipe_path)){
     row_entry <- df[x,]
+    message(paste("Scraping category ",category,", recipe ",x,
+                  " out of ",length(df$recipe_path), sep=""))
     recipe_row <- scrape_ingr(row_entry = row_entry)
     recipe_df <- bind_rows(recipe_df, recipe_row)
   }
