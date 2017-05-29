@@ -10,11 +10,24 @@ file.create(errortxt, overwrite=TRUE)
 scrape_ingr <- function(row_entry){
   
   num <- row_entry$recipe_path
-  # num <- 14024
+   #num <- 17971
   url <- paste("http://allrecipes.com/recipe/",num,sep="")
   
   # Scrap ingredients and misc recipe characteristics
-  webpage <- read_html(url)
+  # If error in reading url, pause and try again
+  tryCatch(
+    webpage <- read_html(url),
+    error = function(err){
+      Sys.sleep(0.2)
+      tryCatch(
+        webpage <- read_html(url),
+        error = function(err){
+          message(paste("Cannot read url", url))
+          write(paste("Cannot read url", url), file=errortxt,append=TRUE) 
+          recipe_row <- row_entry
+        }
+      )
+    })
   
   recipe_name2 <- webpage %>%
     html_nodes(".recipe-summary__h1") %>%
