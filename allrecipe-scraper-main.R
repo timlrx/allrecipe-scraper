@@ -1,47 +1,35 @@
 library(rvest)
+library(dplyr)
 
-url<-"http://allrecipes.com/recipe/8495/chicken-cordon-bleu-i/?internalSource=rotd&referringId=659&referringContentType=recipe%20hub&clickId=cardslot%201"
-url<- "http://allrecipes.com/recipe/86738/phenomenal-chicken-and-pasta-in-creamy-pesto-sauce/?internalSource=recipe%20hub&referringId=733&referringContentType=recipe%20hub&clickId=cardslot%2028"
+# Initialising
+files <- list.files(path="raw_links/", pattern="*.csv", full.names=T, recursive=FALSE)
+source("allrecipe-scraper-ingr-func.R")
 
-#Using CSS selectors to scrap ingredients
+# Loop over all files
+for(i in 1:2){
+  df <- read.csv(files[i], as.is=T)
+  category <- df$recipe_category[1]
+  recipe_df <- data.frame()
 
-webpage <- read_html(url)
+  # Loop over all recipe paths in the file
+  for(x in 1:2){
+    row_entry <- df[x,]
+    recipe_row <- scrape_ingr(row_entry = row_entry)
+    recipe_df <- bind_rows(recipe_df, recipe_row)
+  }
+  csvpath <- paste("recipe_data/",category,"_recipe_",Sys.Date(),".csv",sep="")
+  write.table(recipe_df, csvpath, append=T, sep=",", row.names=F, col.names=T)
+  
+}
 
-recipe_name <- webpage %>%
-               html_nodes(".recipe-summary__h1") %>%
-               html_text
-
-recipe_time <- webpage %>%
-               html_nodes(".ready-in-time") %>%
-               html_text
-
-recipe_servings <- webpage %>%
-                   html_nodes(".adjust-servings__form #servings") %>%
-                   html_attr("value")
-
-recipe_calorie <- webpage %>%
-  html_nodes(".calorie-count") %>%
-  html_text
-recipe_calorie <- gsub("([0-9]+).*$", "\\1", recipe_calorie)
-
-recipe_ingr <- webpage %>%
-                    html_nodes(".added") %>%
-                    html_text
-
-recipe_ingr_id <- webpage %>%
-                  html_nodes(".added") %>%
-                  html_attr("data-id")
-
-# Subset only the ingredients (those with data-id != 0)
-recipe_ingr <- tolower(recipe_ingr[!is.na(recipe_ingr_id) & !recipe_ingr_id=="0"])
-
-# Remove ingredient amounts / measurement / preparation methods / 
-recipe_name
+### Check manually
+recipe_name2
 recipe_time
 recipe_servings
 recipe_calorie
 recipe_ingr
 
+# Remove ingredient amounts / measurement / preparation methods / 
 ## Remove punctuation and numbers
 recipe_ingr <- gsub('[0-9]+|[[:punct:]]', '', recipe_ingr)
 ## Remove measurement units

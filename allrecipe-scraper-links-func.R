@@ -34,7 +34,7 @@ scrape_links<-function(max_page_no, category, url_list, file_path){
         as.character()
       
       # Replace punctuation with space and set all test to lower case
-      recipe_name <- tolower(gsub('[[:punct:]]', ' ', recipe_name))
+      recipe_name <- trimws(tolower(gsub('[[:punct:]]', ' ', recipe_name)))
       
       recipe_category <- rep(category[i],length(recipe_path))
       recipe_page_no <- rep(page_no,length(recipe_path))
