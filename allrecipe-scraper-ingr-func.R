@@ -12,7 +12,7 @@ scrape_ingr <- function(row_entry){
   # Add random pause to slow down speed of scraping
   Sys.sleep(1+runif(1, min=1, max=5))
   num <- row_entry$recipe_path
-   num <- 13965
+  # num <- 13965
   url <- paste("http://allrecipes.com/recipe/",num,sep="")
   
   # Scrap ingredients and misc recipe characteristics
