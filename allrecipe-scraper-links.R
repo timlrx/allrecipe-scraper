@@ -24,5 +24,51 @@ url_list <- c("http://allrecipes.com/recipes/696/world-cuisine/asian/filipino/?p
               "http://allrecipes.com/recipes/702/world-cuisine/asian/thai/?page=",
               "http://allrecipes.com/recipes/700/world-cuisine/asian/korean/?page=")
 
-scrape_links(max_page_no=10, category=category, url_list=url_list, file_path="raw_links/")
+scrape_links(max_page_no=20, category=category, url_list=url_list, file_path="raw_links/")
+
+### African ###
+category <- c("north african","south african","east african")
+
+url_list <- c("http://allrecipes.com/recipes/17582/world-cuisine/african/north-african/?page=",
+              "http://allrecipes.com/recipes/15035/world-cuisine/african/south-african/?page=",
+              "http://allrecipes.com/recipes/17845/world-cuisine/asian/east-african/?page=")
+
+### Australian, NZ and Canada ###
+category <- c("australian", "canadian")
+
+url_list <- c("http://allrecipes.com/recipes/228/world-cuisine/australian-and-new-zealander/?page=",
+              "http://allrecipes.com/recipes/733/world-cuisine/canadian/?page=")
+
+### European ###
+category <- c("austrian", "belgian", "dutch", "eastern european", "french", "german",
+              "greek", "italian", "portugese", "scandinavian", "spanish", "swiss", "uk-ireland")
+
+url_list <- c("http://allrecipes.com/recipes/718/world-cuisine/european/austrian/?page=",
+              "http://allrecipes.com/recipes/719/world-cuisine/european/belgian/?page=",
+              "http://allrecipes.com/recipes/720/world-cuisine/european/dutch/?page=",
+              "http://allrecipes.com/recipes/712/world-cuisine/european/eastern-european/?page=",
+              "http://allrecipes.com/recipes/721/world-cuisine/european/french/?page=",
+              "http://allrecipes.com/recipes/722/world-cuisine/european/german/?page=",
+              "http://allrecipes.com/recipes/731/world-cuisine/european/greek/?page=",
+              "http://allrecipes.com/recipes/723/world-cuisine/european/italian/?page=",
+              "http://allrecipes.com/recipes/724/world-cuisine/european/portugese/?page=",
+              "http://allrecipes.com/recipes/725/world-cuisine/european/scandinavian/?page=",
+              "http://allrecipes.com/recipes/726/world-cuisine/european/spanish/?page=",
+              "http://allrecipes.com/recipes/727/world-cuisine/european/swiss/?page=",
+              "http://allrecipes.com/recipes/704/world-cuisine/european/uk-and-ireland/?page=")
+
+### Latin American ###
+category <- c("carribean", "mexican", "south american")
+
+url_list <- c("http://allrecipes.com/recipes/230/world-cuisine/latin-american/caribbean/?page=",
+              "http://allrecipes.com/recipes/728/world-cuisine/latin-american/mexican/?page=",
+              "http://allrecipes.com/recipes/730/world-cuisine/latin-american/south-american/?page=")
+              
+### Middle Eastern ###
+category <- c("israeli", "lebanese", "persian", "turkish")
+
+url_list <- c("http://allrecipes.com/recipes/1826/world-cuisine/middle-eastern/israeli/?page=",
+              "http://allrecipes.com/recipes/1824/world-cuisine/middle-eastern/lebanese/?page=",
+              "http://allrecipes.com/recipes/15937/world-cuisine/middle-eastern/persian/?page=",
+              "http://allrecipes.com/recipes/1825/world-cuisine/middle-eastern/turkish/?page=")
 

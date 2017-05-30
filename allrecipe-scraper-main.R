@@ -12,7 +12,7 @@ for(i in 1:2){
   recipe_df <- data.frame()
 
   # Loop over all recipe paths in the file
-  for(x in 1:length(df$recipe_path)){
+  for(x in 1:5){
     row_entry <- df[x,]
     message(paste("Scraping category ",category,", recipe ",x,
                   " out of ",length(df$recipe_path), sep=""))
