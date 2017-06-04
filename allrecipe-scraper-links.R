@@ -26,7 +26,18 @@ url_list <- c("http://allrecipes.com/recipes/696/world-cuisine/asian/filipino/?p
 
 scrape_links(max_page_no=20, category=category, url_list=url_list, file_path="raw_links/")
 
-### African ###
+### More Asian ###
+category <- c("bangladeshi","pakistani","indonesian","malaysian","vietnamnese")
+
+url_list <- c("http://allrecipes.com/recipes/16100/world-cuisine/asian/bangladeshi/?page=",
+              "http://allrecipes.com/recipes/15974/world-cuisine/asian/pakistani/?page=",
+              "http://allrecipes.com/recipes/698/world-cuisine/asian/indonesian/?page=",
+              "http://allrecipes.com/recipes/701/world-cuisine/asian/malaysian/?page=",
+              "http://allrecipes.com/recipes/703/world-cuisine/asian/vietnamnese/?page=")
+
+
+
+### African ### 
 category <- c("north african","south african","east african")
 
 url_list <- c("http://allrecipes.com/recipes/17582/world-cuisine/african/north-african/?page=",
@@ -40,8 +51,8 @@ url_list <- c("http://allrecipes.com/recipes/228/world-cuisine/australian-and-ne
               "http://allrecipes.com/recipes/733/world-cuisine/canadian/?page=")
 
 ### European ###
-category <- c("austrian", "belgian", "dutch", "eastern european", "french", "german",
-              "greek", "italian", "portugese", "scandinavian", "spanish", "swiss", "uk-ireland")
+category <- c("austrian", "belgian", "dutch", "eastern  european", "french", "german",
+              "greek", "italian", "portugese", "scandinavian", "spanish", "swiss")
 
 url_list <- c("http://allrecipes.com/recipes/718/world-cuisine/european/austrian/?page=",
               "http://allrecipes.com/recipes/719/world-cuisine/european/belgian/?page=",
@@ -55,7 +66,7 @@ url_list <- c("http://allrecipes.com/recipes/718/world-cuisine/european/austrian
               "http://allrecipes.com/recipes/725/world-cuisine/european/scandinavian/?page=",
               "http://allrecipes.com/recipes/726/world-cuisine/european/spanish/?page=",
               "http://allrecipes.com/recipes/727/world-cuisine/european/swiss/?page=",
-              "http://allrecipes.com/recipes/704/world-cuisine/european/uk-and-ireland/?page=")
+              "http://allrecipes.com/recipes/719/world-cuisine/european/uk-and-ireland/?page=")
 
 ### Latin American ###
 category <- c("carribean", "mexican", "south american")
